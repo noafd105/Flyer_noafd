@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AFD Registerpage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <style>
+        html,
+        body {
+            background-color: #009ee0;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        input,
+        button,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        #btnSend {
+            margin-top: 1.5rem;
+        }
+
+        button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cc0000;
+        }
+
+        .fusion-header {
+            top: 0;
+            background-color: #009ee0;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .fusion-standard-logo {
+            height: auto;
+            width: 200px;
+        }
+
+        .main {
+            width: 100%;
+            margin-top: 0;
+            background-color: #2965a6;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .col-8 {
+            margin: 0.5rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .col-4 {
+            margin: 0.5rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .swb-pristine {
+            width: 100%;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .row-checkbox {
+            max-width: 800px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1rem;
+        }
+
+        .row-checkbox input[type="checkbox"] {
+            margin-top: 0.2rem;
+            /* Optische Anpassung für bessere Ausrichtung */
+            flex-shrink: 0;
+            /* Verhindert, dass die Checkbox schrumpft */
+            max-width: 20px;
+        }
+
+        .row-checkbox label {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.4;
+            width: auto;
+            max-width: 400px;
+        }
+
+        .margin-div {
+            padding: 1rem;
+            margin: 1rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        @media (max-width: 600px) {
+            .row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .col-4,
+            .col-8 {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            border-radius: 1rem;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="fusion-header">
+        <div class="fusion-logo">
+            <a class="fusion-logo-link" href="https://www.volksverpetzer.de/">
+                <img src="./img/afd_logo_480x240.png" class="fusion-standard-logo" alt="AfD logo"/>
+            </a>
+
+        </div>
+    </header>
+    <div class="main">
+        <div class="margin-div">
+            <form action="/thetruth" id="formular" name="formular" method="POST">
+
+                <div class="row">
+                    <div class="col-8">
+                        <select data-label="Anrede" id="anrede" name="anrede" class="swb-pristine" required>
+                            <option value="" disabled selected>Anrede</option>
+                            <option value="1">Frau</option>
+                            <option value="2">Herr</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <input data-label="Titel" type="text" id="titel" name="titel" placeholder="Titel"
+                            class="swb-pristine">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <input type="text" data-label="Vorname" id="vorname" name="vorname" placeholder="Vorname"
+                            class="swb-pristine" required>
+
+                    </div>
+                    <div class="col-8">
+                        <input type="text" data-label="Nachname" id="name" name="name" placeholder="Nachname"
+                            class="swb-pristine" required>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <select data-label="Bundesland" id="bundesland" name="bundesland" class="swb-pristine">
+                            <option value="" disabled selected>Bundesland</option>
+                            <option value="1">Baden-Württemberg</option>
+                            <option value="2">Bayern</option>
+                            <option value="3">Berlin</option>
+                            <option value="4">Brandenburg</option>
+                            <option value="5">Bremen</option>
+                            <option value="6">Hamburg</option>
+                            <option value="7">Hessen</option>
+                            <option value="8">Mecklenburg-Vorpommern</option>
+                            <option value="9">Niedersachsen</option>
+                            <option value="10">Nordrhein-Westfalen</option>
+                            <option value="11">Rheinland-Pfalz</option>
+                            <option value="12">Saarland</option>
+                            <option value="13">Sachsen</option>
+                            <option value="14">Sachsen-Anhalt</option>
+                            <option value="15">Schleswig-Holstein</option>
+                            <option value="16">Thüringen</option>
+                            <option value="17">EU Land</option>
+                            <option value="18">Ausland (Nicht EU)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="email" data-label="E-Mail" id="email" name="email" placeholder="E-Mail"
+                            class="swb-pristine" required>
+                    </div>
+                </div>
+
+                <div class="row-checkbox">
+                    <input type="checkbox" id="dsgvo" required>
+                    <label for="dsgvo">ich Akzeptiere die <a href="#" id="view_dsgvo">
+                            Datenschutzeinstellungen</a></label>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const modal = document.getElementById('dsgvoModal');
+                            const btn = document.getElementById('view_dsgvo');
+                            const span = document.getElementsByClassName('close')[0];
+
+                            btn.onclick = function (e) {
+                                e.preventDefault();
+                                modal.style.display = 'block';
+                            }
+
+                            span.onclick = function () {
+                                modal.style.display = 'none';
+                            }
+
+                            window.onclick = function (event) {
+                                if (event.target == modal) {
+                                    modal.style.display = 'none';
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+
+
+
+
+                <div id="dsgvoModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Datenschutzeinstellungen</h2>
+
+
+                        <p id="CookieBoxTextDescription" style="display:block">
+                            <span class="_brlbs-paragraph _brlbs-text-description">
+                                <strong>Einwilligung für Cookies und ähnliche Funktionen</strong>
+                                <br>
+                            </span>
+                            <span class="_brlbs-paragraph _brlbs-text-confirm-age">Wenn
+                                Sie unter 16 Jahre alt sind und Ihre Zustimmung zu freiwilligen Diensten geben möchten,
+                                müssen
+                                Sie Ihre Erziehungsberechtigten um Erlaubnis bitten.
+                            </span>
+                            <!-- <span class="_brlbs-paragraph _brlbs-text-technology">Wir verwenden Cookies und andere Technologien
+                        auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website
+                        und Ihre Erfahrung zu verbessern.
+                    </span>
+                    <span class="_brlbs-paragraph _brlbs-text-personal-data">Personenbezogene Daten können verarbeitet
+                        werden (z. B. IP-Adressen), z. B. für personalisierte Anzeigen und Inhalte oder Anzeigen- und
+                        Inhaltsmessung.
+                    </span> -->
+                            <span class="_brlbs-paragraph _brlbs-text-more-information">Weitere
+                                Informationen über die Verwendung Ihrer Daten finden Sie in unserer <a
+                                    class="_brlbs-cursor"
+                                    href="https://spenden.afd.de/impressum-datenschutz/">Datenschutzerklärung</a>.</span>
+                            Mit der Auswahl „Ich akzeptiere“ stimmen Sie der Verarbeitung Ihrer personenbezogenen Daten
+                            durch
+                            Nutzung von Cookies und ähnlichen Technologien
+                            <!-- auf unseren Websites  -->
+                            der Alternative für Deutschland zu.
+                            <!-- Dadurch können wir Ihre Aktivitäten anhand von Geräte- und Browsereinstellungen nachvollziehen. -->
+                            Dies ermöglicht es uns, für Sie interessante Werbeanzeigen auch entsprechend Ihrer
+                            politischen
+                            Interessen sowie weltlichen Anschauung bereitzustellen.
+                            <!-- sowie die Funktionalitäten unserer Website sicherzustellen und stetig zu verbessern.  -->
+                            Die Verarbeitung erfolgt zur statistischen Analyse,
+                            individualisierten Werbung und Reichweitenmessung von Werbekampagnen. Dabei werden Daten an
+                            Drittanbieter wie Facebook und Google auch in die USA weitergegeben und dort verarbeitet.
+                            <!-- Sie können unter "Individuelle Datenschutzeinstellungen" Ihre Einwilligung auf Grundlage weiterer Informationen
+                    auch für einzelne Zwecke oder einzelne Funktionen erteilen und über
+                    https://afd.de/datenschutzhinweise/ jederzeit für die Zukunft widerrufen. <span
+                        class="_brlbs-paragraph _brlbs-text-revoke">Sie können Ihre Auswahl jederzeit unter <a
+                            class="_brlbs-cursor" href="#" data-cookie-individual="">Einstellungen</a> widerrufen oder
+                        anpassen.</span> -->
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="submit" id="btnSend">Absenden</button>
+                    </div>
+                </div>
+            </form>
+            <!-- <div id="formFeedback" style="color: white; text-align: center; margin: 1rem;"></div> -->
+
+        </div>
+    </div>
+    <!-- <script>
+    document.getElementById('formular').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formFeedback').textContent = 'Danke für deine Registrierung!';
+});
+</script> -->
+</body>
+
+</html>
