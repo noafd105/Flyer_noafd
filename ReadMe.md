@@ -1,7 +1,5 @@
 # FlyerNoAfD
 
-[toc]
-
 ## Inhalt
 
 Das Projekt beinhaltet eine Startseite, die bei Verbindung mit dem WLAN mithilfe der `main.py` eine Weiterleitung auf eine Registrierungsseite durchführt.
